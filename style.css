@@ -1,27 +1,216 @@
-/* Tavolozza: #EAABA9 (Rosa), #E1E1DB (Grigio), #000000 (Nero) */
+/* ─── DEFINIZIONE VARIABILI ─── */
+:root {
+    --bg: #000000;
+    --primary: #EAABA9;   /* Rosa */
+    --secondary: #E1E1DB; /* Grigio */
+    --text: #E1E1DB;
+    --border-size: 3px;
+    --font-ui: 'Helvetica', sans-serif;
+}
 
-body {
-    background-color: #000000;
-    color: #E1E1DB;
-    font-family: 'Helvetica', sans-serif;
-    margin: 0;
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html, body {
+    height: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    line-height: 1.1;
+    overflow-x: hidden;
+}
+
+/* ─── SEZIONE INTRO FULLSCREEN (Nuova) ─── */
+.intro-hero {
+    height: 100vh; /* 100% dell'altezza dello schermo */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg);
+    z-index: 10; /* Sopra il contenuto principale all'inizio */
+    position: relative;
+}
+
+.intro-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    text-align: center;
+    /* Rimosso il border-bottom per pulizia totale */
 }
 
-h1 {
-    color: #EAABA9;
-    font-size: 3rem;
+.hero-naming-img {
+    height: clamp(50px, 10vw, 140px); /* Dimensione flessibile */
+    width: auto;
+    display: block;
+    margin-bottom: 24px; /* Spazio tra logo e sottotitolo */
+}
+
+.intro-sub-text {
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-size: clamp(12px, 1vw, 15px);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    border-bottom: 2px solid #EAABA9;
-    padding-bottom: 10px;
+    font-weight: 400;
+    opacity: 0.8; /* Leggermente più discreto rispetto al logo */
 }
 
-p {
-    color: #E1E1DB;
-    font-size: 1.2rem;
+/* ─── Nav ─── */
+.nav {
+    position: absolute; /* Galleggia sopra l'intro se necessario */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 14px 20px;
+    z-index: 100; /* Sempre sopra a tutto */
+    background-color: var(--bg); /* O trasparente se preferisci */
+}
+
+
+.nav-logo-img {
+    height: 40px; /* Ridotto per la nav bar rispetto ai 120px di prima */
+    width: auto;
+    display: block;
+}
+
+.nav-left, 
+.nav-right {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: clamp(10px, 1vw, 50px);
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: var(--secondary);
+    flex: 1;    
+}
+.nav-logo-img {
+    height: 80px; /* La tua dimensione */
+    width: auto;
+    display: block;
+}
+
+.nav-right { 
+    justify-content: flex-end; 
+    text-align: right; 
+}
+
+.nav-link {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.5;
+}
+
+/* ─── Main Content ─── */
+main {
+    padding: 2vw;
+    /* Spazio rimosso, il contenuto segue naturalmente la intro */
+}
+
+.main-hero h2 {
+    font-size: clamp(4rem, 8vw, 12rem);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin-bottom: 10vh;
+    margin-top: 5vh; 
+    color: var(--primary);
+}
+
+/* ─── Griglia Portfolio ─── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 0;
+    border-top: var(--border-size) solid var(--secondary);
+    border-left: var(--border-size) solid var(--secondary);
+}
+
+.project-card {
+    aspect-ratio: 1 / 1;
+    border-right: var(--border-size) solid var(--secondary);
+    border-bottom: var(--border-size) solid var(--secondary);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+.project-card span {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.project-card h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+/* ─── RESPONSIVE DESIGN (Mobile) ─── */
+@media (max-width: 768px) {
+    
+    /* Ridimensiona il logo nella intro */
+    .hero-naming-img {
+        height: 80px; /* Più piccolo per non riempire troppo lo schermo */
+        margin-bottom: 15px;
+    }
+
+    .intro-sub-text {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        padding: 0 20px; /* Evita che il testo tocchi i bordi */
+    }
+
+    /* Nasconde o ridimensiona la nav su mobile */
+    .nav {
+        padding: 10px 15px;
+    }
+
+    .nav-right {
+        display: none; /* Spesso su mobile si nasconde il testo lungo per pulizia */
+    }
+
+    /* Titolo principale più piccolo per non andare fuori schermo */
+    .main-hero h2 {
+        font-size: 4rem; 
+        line-height: 0.9;
+        margin-top: 10vh;
+    }
+
+    /* La griglia diventa una colonna singola */
+    .grid {
+        grid-template-columns: 1fr; /* Un solo quadratone per riga */
+        border-left: none;
+        border-right: none;
+    }
+
+    .project-card {
+        aspect-ratio: 1 / 1; /* Mantiene i quadrati perfetti */
+        border-left: none;
+        border-right: none;
+        padding: 20px;
+    }
+    
+    .project-card h2 {
+        font-size: 1.5rem;
+    }
 }
