@@ -209,11 +209,63 @@ main {
 
 .site-footer {
     width: 100%;
-    height: 1px; /* Quasi invisibile, serve solo a portare il bordo */
-    background-color: transparent;
-    
-    margin-top: 2vw; /* Distanza dall'ultima immagine della griglia */
+    background-color: var(--nero);
+    border-top: 1px solid var(--rosa); /* Chiusura bordo rosa */
+    padding: 60px 2vw 40px 2vw;
+    margin-top: 10vh;
 }
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    font-size: clamp(10px, 1.2vw, 14px);
+    letter-spacing: 0.1em;
+}
+
+.footer-left p, .footer-right p {
+    opacity: 0.6;
+    margin-bottom: 8px;
+}
+
+.footer-link {
+    color: var(--bianco);
+    text-decoration: none;
+    font-size: clamp(14px, 2vw, 24px);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--rosa);
+}
+
+.footer-right {
+    text-align: right;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+    }
+    
+    .footer-right {
+        text-align: left;
+    }
+    
+    .site-footer {
+        padding: 40px 20px;
+        /* Chiusura bordo rosa anche su mobile */
+        border-bottom: 1px solid var(--rosa); 
+    }
+}
+
+
 
 /* ─── RESPONSIVE DESIGN (Mobile) ─── */
 @media (max-width: 768px) {
